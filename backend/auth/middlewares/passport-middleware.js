@@ -1,7 +1,7 @@
 const passport = require('passport');
 const { Strategy } = require('passport-jwt');
-const { SECRET } = require('../constants');
-const db = require('../db');
+const { SECRET } = require('../../constants');
+const db = require('../../db');
 
 const cookieExtractor = (req) => {
   let token = null;

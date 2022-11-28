@@ -7,7 +7,7 @@ const { PORT, CLIENT_URL } = require('./constants');
 const app = express();
 
 // import middlewares
-require('./middlewares/passport-middleware');
+require('./auth/middlewares/passport-middleware');
 
 // initialize middlewares
 app.use(express.json());
@@ -16,7 +16,7 @@ app.use(cors({ origin: CLIENT_URL, credential: true }));
 app.use(passport.initialize());
 
 // import routes
-const authRoutes = require('./routes/auth');
+const authRoutes = require('./auth/routes');
 
 // initialize routes
 app.use('/api', authRoutes);

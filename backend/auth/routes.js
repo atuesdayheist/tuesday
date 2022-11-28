@@ -1,10 +1,10 @@
 const { Router } = require('express');
 const {
   getUsers, register, login, protectedRoute, logout,
-} = require('../controllers/auth');
-const { validationMiddleware } = require('../middlewares/validation-middleware');
-const { registerValidation, loginValidation } = require('../validators/auth');
-const { userAuth } = require('../middlewares/auth-middleware');
+} = require('./controller');
+const { validationMiddleware } = require('./middlewares/validation-middleware');
+const { registerValidation, loginValidation } = require('./validator');
+const { userAuth } = require('./middlewares/auth-middleware');
 
 const router = Router();
 
