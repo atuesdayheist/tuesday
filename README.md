@@ -4,4 +4,4 @@ Personal Service Web Application
 
 ### Resources:
 
-- PERN Authentication: https://youtu.be/ykB4KeuxKVI?t=2465
+- PERN Authentication Backend: https://youtu.be/ykB4KeuxKVI
