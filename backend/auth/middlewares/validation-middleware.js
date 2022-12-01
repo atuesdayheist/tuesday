@@ -1,4 +1,4 @@
-const { validationResult } = require('express-validator');
+const { validationResult } = require("express-validator");
 
 /* eslint-disable consistent-return */
 exports.validationMiddleware = (req, res, next) => {

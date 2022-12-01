@@ -1,7 +1,7 @@
-const passport = require('passport');
-const { Strategy } = require('passport-jwt');
-const { SECRET } = require('../../constants');
-const db = require('../../db');
+const passport = require("passport");
+const { Strategy } = require("passport-jwt");
+const { SECRET } = require("../../constants");
+const db = require("../../db");
 
 const cookieExtractor = (req) => {
   let token = null;
@@ -17,12 +17,13 @@ const opts = {
 passport.use(
   new Strategy(opts, async ({ id }, done) => {
     try {
-      const { rows } = await db.query('SELECT user_id, username FROM users WHERE user_id = $1', [
-        id,
-      ]);
+      const { rows } = await db.query(
+        "SELECT user_id, username FROM users WHERE user_id = $1",
+        [id]
+      );
 
       if (!rows.length) {
-        throw new Error('401 not authorized');
+        throw new Error("401 not authorized");
       }
 
       const user = { id: rows[0].user_id, username: rows[0].username };
@@ -31,5 +32,5 @@ passport.use(
       done(null, false);
       throw new Error(e.message);
     }
-  }),
+  })
 );

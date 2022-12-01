@@ -5,14 +5,16 @@ const { SECRET } = require('../constants');
 
 exports.getUsers = async (req, res) => {
   try {
-    const { rows } = await db.query('select user_id, username, email from users');
+    const { rows } = await db.query(
+      'select user_id, username, email from users'
+    );
     return res.status(200).json({
       success: true,
       users: rows,
     });
-  } catch (e) {
+  } catch (error) {
     return res.status(500).json({
-      error: e.message,
+      error: error.message,
     });
   }
 };
@@ -21,18 +23,17 @@ exports.register = async (req, res) => {
   const { email, username, password } = req.body;
   try {
     const hashedPassword = await hash(password, 10);
-    await db.query('INSERT INTO users(email, username, password) values ($1 , $2 , $3)', [
-      email,
-      username,
-      hashedPassword,
-    ]);
+    await db.query(
+      'INSERT INTO users(email, username, password) values ($1 , $2 , $3)',
+      [email, username, hashedPassword]
+    );
     return res.status(201).json({
       success: true,
       message: 'Registration Successful',
     });
-  } catch (e) {
+  } catch (error) {
     return res.status(500).json({
-      error: e.message,
+      error: error.message,
     });
   }
 };
@@ -49,9 +50,9 @@ exports.login = async (req, res) => {
       success: true,
       message: 'Logged in successfully',
     });
-  } catch (e) {
+  } catch (error) {
     return res.status(500).json({
-      error: e.message,
+      error: error.message,
     });
   }
 };
@@ -62,9 +63,9 @@ exports.logout = async (req, res) => {
       success: true,
       message: 'Logged out successfully',
     });
-  } catch (e) {
+  } catch (error) {
     return res.status(500).json({
-      error: e.message,
+      error: error.message,
     });
   }
 };
@@ -74,9 +75,9 @@ exports.protectedRoute = async (req, res) => {
     return res.status(200).json({
       info: 'protected info',
     });
-  } catch (e) {
+  } catch (error) {
     return res.status(500).json({
-      error: e.message,
+      error: error.message,
     });
   }
 };
