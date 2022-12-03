@@ -1,6 +1,7 @@
 {
   "name": "tuesday",
   "version": "1.0.0",
+  "homepage": "https://atuesday.io",
   "description": "Personal Service Web Application",
   "main": "server.js",
   "scripts": {
