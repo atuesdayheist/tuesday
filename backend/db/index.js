@@ -9,11 +9,11 @@ const pool_dev = new Pool({
 });
 
 const pool_prod = new Pool({
-  user: process.env.DB_USER,
-  host: 'localhost',
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASS,
-  port: 5432,
+  host: process.env.PGHOST,
+  port: process.env.PGPORT,
+  database: process.env.PGDATABASE,
+  user: process.env.PGUSER,
+  password: process.env.PGPASSWORD,
 });
 
 if (process.env.NODE_ENV === 'dev') {

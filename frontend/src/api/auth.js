@@ -1,24 +1,26 @@
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 
+const api_endpoint = process.env.REACT_APP_SERVER_URL;
+
 export async function onRegistration(registrationData) {
   return await axios.post(
-    'http://localhost:8000/api/register',
+    `https://${api_endpoint}/api/register`,
     registrationData,
   );
 }
 
 export async function onLogin(loginData) {
   return await axios.post(
-    'http://localhost:8000/api/login',
+    `https://${api_endpoint}/api/login`,
     loginData,
   );
 }
 
 export async function onLogout() {
-  return await axios.get('http://localhost:8000/api/logout');
+  return await axios.get(`https://${api_endpoint}/api/logout`);
 }
 
 export async function fetchProtectedInfo() {
-  return await axios.get('http://localhost:8000/api/protected');
+  return await axios.get(`https://${api_endpoint}/api/protected`);
 }
