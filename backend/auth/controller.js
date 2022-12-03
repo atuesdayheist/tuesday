@@ -3,6 +3,13 @@ const { sign } = require('jsonwebtoken');
 const db = require('../db');
 const { SECRET } = require('../constants');
 
+exports.test = async (req, res) => {
+  return res.status(200).json({
+    success: true,
+    message: 'This is working',
+  });
+};
+
 exports.getUsers = async (req, res) => {
   try {
     const { rows } = await db.query(
