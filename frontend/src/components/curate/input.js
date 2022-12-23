@@ -4,9 +4,20 @@ const Curate = () => {
   const [value, setValue] = useState({
     curateURL: '',
   });
+  const [error, setError] = useState(false);
 
   const onChange = (e) => {
-    setValue(e.target.value);
+    setValue({ curateURL: e.target.value });
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await onLogin(values);
+      dispatch(authenticateUser());
+    } catch (error) {
+      setError(error.response.data.errors[0].msg);
+    }
   };
 
   return (

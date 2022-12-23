@@ -2,7 +2,12 @@ import axios from 'axios';
 
 axios.defaults.withCredentials = true;
 
-const api_endpoint = process.env.REACT_APP_SERVER_URL;
+let api_endpoint = '';
+if (process.env.NODE_ENV == 'development') {
+  api_endpoint = 'http://localhost.3000';
+} else {
+  api_endpoint = 'https://r.atuesday.io';
+}
 
 export async function onRegistration(registrationData) {
   return await axios.post(
