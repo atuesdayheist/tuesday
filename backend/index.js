@@ -21,9 +21,11 @@ app.use(express.static('public'));
 
 // import routes
 const authRoutes = require('./auth/routes');
+const curationRoutes = require('./curate/routes');
 
 // initialize routes
 app.use('/api', authRoutes);
+app.use('/curate', curationRoutes);
 
 // Start App
 const appStart = () => {
