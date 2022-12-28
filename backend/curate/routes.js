@@ -3,6 +3,6 @@ const { getImageFromTweet } = require('./controller');
 
 const router = Router();
 
-router.get('/', getImageFromTweet);
+router.post('/getTweet', getImageFromTweet);
 
 module.exports = router;

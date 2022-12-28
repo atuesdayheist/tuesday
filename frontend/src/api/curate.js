@@ -10,8 +10,5 @@ if (process.env.NODE_ENV == 'development') {
 }
 
 export async function getImageFromTweet(tweetID) {
-  return await axios.get(
-    `${api_endpoint}/curate/getTweet`,
-    tweetID.curateURL,
-  );
+  return await axios.post(`${api_endpoint}/curate/getTweet`, tweetID);
 }

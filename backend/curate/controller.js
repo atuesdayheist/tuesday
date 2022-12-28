@@ -1,20 +1,26 @@
-import axios from 'axios';
-import { TWITTER_BEARER_TOKEN } from '../constants';
+const fetch = (...args) =>
+  import('node-fetch').then(({ default: fetch }) => fetch(...args));
+const { TWITTER_BEARER_TOKEN } = require('../constants');
 
-axios.defaults.withCredentials = true;
-
-const config = {
+const options = {
+  method: 'GET',
   headers: { Authorization: `Bearer ${TWITTER_BEARER_TOKEN}` },
 };
 
-export async function getImageFromTweet(tweetID) {
-  console.log(tweetID);
-  //   return await axios
-  //     .get(
-  //       `https://api.twitter.com/2/tweets/${tweetID}?expansions=attachments.media_keys&media.fields=url`,
-  //       config
-  //     )
-  //     .then((res) => {
-  //       console.log(res.data);
-  //     });
-}
+exports.getImageFromTweet = async (req, res) => {
+  const curateURL = req.body.curateURL;
+  // return res.status(200).json({ success: 'working lemao' });
+  fetch(
+    `https://api.twitter.com/2/tweets/${curateURL}?expansions=attachments.media_keys&media.fields=url`,
+    options
+  )
+    .then((response) => {
+      response.json().then((data) => {
+        const mediaURL = data.includes.media[0].url;
+        return res.status(200).json({ success: mediaURL });
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
