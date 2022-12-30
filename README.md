@@ -6,7 +6,10 @@ Personal Service Web Application
 1. ~~Create Backend~~
 2. ~~Create Frontend~~
 3. ~~Create Authentication~~
-4. Deploy to CPanel
+4. ~~Deploy to railway~~ 
+5. Create Curation
+    - Access twitter API from frontend
+    - Create DB / S3 storage
 
 ### Bugs/Issues
 **Authentication**

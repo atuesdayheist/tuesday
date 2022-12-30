@@ -9,6 +9,6 @@ if (process.env.NODE_ENV == 'development') {
   api_endpoint = 'https://r.atuesday.io';
 }
 
-export async function getImageFromTweet(tweetID) {
-  return await axios.post(`${api_endpoint}/curate/getTweet`, tweetID);
+export async function getImageFromSource(tweetID) {
+  return await axios.post(`${api_endpoint}/curate/getImage`, tweetID);
 }

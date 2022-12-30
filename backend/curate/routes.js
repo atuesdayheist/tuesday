@@ -1,8 +1,9 @@
 const { Router } = require('express');
-const { getImageFromTweet } = require('./controller');
+const { getImageFromSource } = require('./controller');
+const { sourceValidation } = require('./validator');
 
 const router = Router();
 
-router.post('/getTweet', getImageFromTweet);
+router.post('/getImage', sourceValidation, getImageFromSource);
 
 module.exports = router;

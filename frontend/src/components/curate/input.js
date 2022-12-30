@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getImageFromTweet } from '../../api/curate';
+import { getImageFromSource } from '../../api/curate';
 
 const Curate = () => {
   const [value, setValue] = useState({
@@ -14,7 +14,7 @@ const Curate = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      await getImageFromTweet(value);
+      await getImageFromSource(value);
     } catch (error) {
       setError(error.response.data.errors[0].msg);
     }
