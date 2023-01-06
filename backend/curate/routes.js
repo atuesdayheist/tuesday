@@ -1,9 +1,9 @@
 const { Router } = require('express');
-const { getImageFromSource } = require('./controller');
-const { sourceValidation } = require('./validator');
+const { getImageFromSource, downloadImageFromURL } = require('./controller');
 
 const router = Router();
 
-router.post('/getImage', sourceValidation, getImageFromSource);
+router.post('/getImage', getImageFromSource);
+router.post('/saveImage', downloadImageFromURL);
 
 module.exports = router;

@@ -13,7 +13,6 @@ create table if not exists curation(
     original_url varchar(255) unique not null,
     image_tags text [],
     image_artist varchar(255) not null,
-    image_title varchar(255),
     image_source varchar(255),
     private_image Boolean default false,
     nsfw_image Boolean default true,

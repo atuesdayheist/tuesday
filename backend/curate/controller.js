@@ -1,5 +1,7 @@
 const fetch = (...args) =>
   import('node-fetch').then(({ default: fetch }) => fetch(...args));
+const axios = (...args) =>
+  import('axios').then(({ default: fetch }) => fetch(...args));
 const { TWITTER_BEARER_TOKEN } = require('../constants');
 
 exports.getImageFromSource = async (req, res) => {
@@ -23,30 +25,41 @@ exports.getImageFromSource = async (req, res) => {
     )
       .then((response) => {
         response.json().then((data) => {
-          const mediaObjects = data.includes.media;
-          const imageObjects = mediaObjects.filter(
-            (media) => media.type == 'photo'
+          // Query username from tweet author_id because for some reason, you can't get the username from the tweet itself
+          const author_id = data.data.author_id;
+          fetch(`https://api.twitter.com/2/users/${author_id}`, options).then(
+            (response) => {
+              response.json().then((userData) => {
+                const mediaObjects = data.includes.media;
+                const imageObjects = mediaObjects.filter(
+                  (media) => media.type == 'photo'
+                );
+
+                // Then handle the rest of data
+                if (imageObjects.length == 0) {
+                  return res.status(500).json({
+                    error: 'The tweet does not appear to have any images',
+                  });
+                }
+
+                const hashtags = [
+                  `artist:${userData.data.username}`,
+                  `artist:${userData.data.name}`,
+                  `twitterUID:${author_id}`,
+                ];
+                data.data.entities.hashtags.map((hashtag) => {
+                  hashtags.push(hashtag.tag);
+                });
+
+                imageObjects.map((image) => {
+                  image.original_url = curateURL;
+                  image.source = 'Twitter';
+                  image.tags = hashtags;
+                });
+                return res.status(200).json({ success: imageObjects });
+              });
+            }
           );
-
-          if (imageObjects.length == 0) {
-            return res
-              .status(500)
-              .json({ error: 'The tweet does not appear to have any images' });
-          }
-
-          const hashtags = [];
-          data.data.entities.hashtags.map((hashtag) => {
-            hashtags.push(hashtag.tag);
-          });
-
-          imageObjects.map((image) => {
-            image.artist = data.author_id;
-            image.original_url = curateURL;
-            image.source = 'Twitter';
-            image.title = '';
-            image.tags = hashtags;
-          });
-          return res.status(200).json({ success: imageObjects });
         });
       })
       .catch((error) => {
@@ -55,4 +68,12 @@ exports.getImageFromSource = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+exports.downloadImageFromURL = async (req, res) => {
+  const curateURLs = req.body.curateURLs;
+  const options = {
+    method: 'GET',
+    headers: { Authorization: `Bearer ${TWITTER_BEARER_TOKEN}` },
+  };
 };
