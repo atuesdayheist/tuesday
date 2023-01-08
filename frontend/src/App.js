@@ -13,7 +13,7 @@ import Home from './components/common/home';
 import Login from './components/auth/login';
 import Dashboard from './components/auth/dashboard';
 import Register from './components/auth/register';
-import Curate from './components/curate/input';
+import CurateIndex from './services/curate/index';
 
 const PrivateRoute = () => {
   const authState = useSelector((state) => state.auth);
@@ -41,7 +41,7 @@ function App() {
 
           <Route element={<PrivateRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/curate" element={<Curate />} />
+            <Route path="/curate" element={<CurateIndex />} />
           </Route>
 
           <Route element={<RestrictedRoute />}>

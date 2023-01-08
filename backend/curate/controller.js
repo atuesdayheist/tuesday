@@ -1,7 +1,5 @@
 const fetch = (...args) =>
   import('node-fetch').then(({ default: fetch }) => fetch(...args));
-const axios = (...args) =>
-  import('axios').then(({ default: fetch }) => fetch(...args));
 const { TWITTER_BEARER_TOKEN } = require('../constants');
 
 exports.getImageFromSource = async (req, res) => {
@@ -55,8 +53,10 @@ exports.getImageFromSource = async (req, res) => {
                   image.original_url = curateURL;
                   image.source = 'Twitter';
                   image.tags = hashtags;
+                  image.nsfw = true;
+                  image.private = false;
                 });
-                return res.status(200).json({ success: imageObjects });
+                return res.status(200).json(imageObjects);
               });
             }
           );
