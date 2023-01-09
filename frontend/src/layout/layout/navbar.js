@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { onLogout } from '../../api/auth';
-import { unauthenticateUser } from '../../redux/slices/authSlice';
+import { onLogout } from '../../services/auth/actions';
+import { unauthenticateUser } from '../../services/auth/authSlice';
 import { useDispatch } from 'react-redux';
 
 const Navbar = () => {

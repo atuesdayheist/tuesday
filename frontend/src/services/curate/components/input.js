@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getImageFromSource } from '../actions';
-import { setPreview } from '../../../redux/slices/curateSlice';
+import { setPreview } from '../curateSlice';
 
 import ImagePreviewContainer from './imagePreviews';
 
@@ -12,6 +12,7 @@ const CurateInput = () => {
   const [error, setError] = useState(false);
 
   const dispatch = useDispatch();
+
   const submitURL = async (e) => {
     e.preventDefault();
     try {

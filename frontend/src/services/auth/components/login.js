@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { onLogin } from '../../api/auth';
+import { onLogin } from '../actions';
 import { useDispatch } from 'react-redux';
-import { authenticateUser } from '../../redux/slices/authSlice';
+import { authenticateUser } from '../authSlice';
 
 const Login = () => {
   const [values, setValues] = useState({

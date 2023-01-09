@@ -8,11 +8,11 @@ import {
 } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import Navbar from './components/layout/navbar';
+import Navbar from './layout/layout/navbar';
 import Home from './components/common/home';
-import Login from './components/auth/login';
-import Dashboard from './components/auth/dashboard';
-import Register from './components/auth/register';
+import Login from './services/auth/components/login';
+import Dashboard from './services/auth/components/dashboard';
+import Register from './services/auth/components/register';
 import CurateIndex from './services/curate/index';
 
 const PrivateRoute = () => {

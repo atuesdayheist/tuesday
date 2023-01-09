@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { onRegistration } from '../../api/auth';
+import { onRegistration } from '../actions';
 
 const Register = () => {
   const [values, setValues] = useState({
