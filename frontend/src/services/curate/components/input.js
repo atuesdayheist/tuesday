@@ -1,27 +1,24 @@
-import { useState, useEffect } from 'react';
-import { getImageFromSource } from '../actions';
-import ImagePreviewContainer from './imagePreviews';
-
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { getImageFromSource } from '../actions';
+import { setPreview } from '../../../redux/slices/curateSlice';
+
+import ImagePreviewContainer from './imagePreviews';
 
 const CurateInput = () => {
   const [curateURL, setCurateURL] = useState(
     'https://twitter.com/atuesdayheist/status/1583376021226946562',
   );
   const [error, setError] = useState(false);
-  const [previewImages, setPreviewImages] = useState([]);
 
-  const onChange = (e) => {
-    setCurateURL(e.target.value);
-  };
-
+  const dispatch = useDispatch();
   const submitURL = async (e) => {
     e.preventDefault();
     try {
       let previewResponse = await getImageFromSource({
         curateURL: curateURL,
       });
-      setPreviewImages(previewResponse.data);
+      dispatch(setPreview(previewResponse.data));
     } catch (error) {
       console.log(error);
       setError(error.response.data.errors[0].msg);
@@ -43,7 +40,7 @@ const CurateInput = () => {
           Get Stuff
         </button>
       </form>
-      <ImagePreviewContainer imgData={previewImages} />
+      <ImagePreviewContainer />
     </div>
   );
 };
