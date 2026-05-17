@@ -4,7 +4,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./src:/app/src # hot-reload in dev
+      - ./api:/app/api
     environment:
-      - PYTHONPATH=/app/src
-    command: uv run uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+      - PYTHONPATH=/app/api
+    command: uv run uvicorn main:app --host 0.0.0.0 --port 8000 --reload
