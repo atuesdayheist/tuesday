@@ -1,6 +1,7 @@
 import os
 from logging.config import fileConfig
 
+from dotenv import load_dotenv
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
@@ -9,6 +10,7 @@ from alembic import context
 from api.db.base import Base
 import api.db.models
 
+load_dotenv()
 
 database_url = os.getenv("DATABASE_URL")
 sync_url = database_url.replace("+asyncpg", "")

@@ -2,4 +2,6 @@
 .env.prod
 .venv
 .python-version
+
 __pycache__
+.ruff_cache
