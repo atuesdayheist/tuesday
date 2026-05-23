@@ -6,8 +6,8 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from api.db.base import Base
-import api.db.models
+from src.database import Base
+from src.auth import User
 
 
 database_url = os.getenv("DATABASE_URL")
