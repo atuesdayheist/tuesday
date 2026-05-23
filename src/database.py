@@ -1,7 +1,14 @@
+import os
+from sqlalchemy.orm import DeclarativeBase, sessionmaker
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
-from sqlalchemy.orm import sessionmaker
 
-from api.settings import settings
+DATABASE_URL = os.getenv("DATABASE_URL")
+from src.config import settings
+
+
+class Base(DeclarativeBase):
+    pass
+
 
 database_url = settings.DATABASE_URL
 

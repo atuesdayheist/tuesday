@@ -15,6 +15,8 @@ class Settings(BaseSettings):
 
     JWT_SECRET: str
 
+    CORS_ORIGINS: list[str]
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
