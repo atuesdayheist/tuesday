@@ -9,7 +9,7 @@ from src.config import settings
 class AuthService:
     def __init__(self, user_repo: UserRepository):
         self.user_repo = user_repo
-    
+
     def create_access_token(self, user_id: int) -> str:
         now = datetime.now(timezone.utc)
         payload = {
@@ -22,17 +22,15 @@ class AuthService:
             payload,
             settings.JWT_SECRET,
             algorithm="HS256",
-            
         )
         return token
-    
-    
+
     async def google_login(self, id_token: str):
         user_data = verify_google_id_token(id_token)
         user = await self.user_repo.get_by_google_sub(user_data["sub"])
         if not user:
             user = await self.user_repo.create(user_data)
-        
+
         jwt = self.create_access_token(user.id)
 
         return {

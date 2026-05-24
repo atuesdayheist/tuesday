@@ -5,13 +5,13 @@ from src.config import settings
 
 
 def verify_google_id_token(token: str):
-  try:
-      idinfo = id_token.verify_oauth2_token(
-          token, Request(), settings.GOOGLE_CLIENT_ID, clock_skew_in_seconds=300
-      )
-      print("VALID TOKEN:", idinfo)
-      return idinfo
+    try:
+        idinfo = id_token.verify_oauth2_token(
+            token, Request(), settings.GOOGLE_CLIENT_ID, clock_skew_in_seconds=300
+        )
+        print("VALID TOKEN:", idinfo)
+        return idinfo
 
-  except Exception as e:
-      print("TOKEN ERROR:", str(e))
-      return None
+    except Exception as e:
+        print("TOKEN ERROR:", str(e))
+        return None

@@ -5,6 +5,7 @@ from .schemas import GoogleAuthRequest
 
 router = APIRouter()
 
+
 @router.post("/google")
 async def google_login(
     payload: GoogleAuthRequest,
