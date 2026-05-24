@@ -29,5 +29,7 @@ class UserRepository(BaseRepository[User]):
         )
 
         self.db.add(user)
+        await self.db.flush()
+        await self.db.refresh(user)
 
         return user
